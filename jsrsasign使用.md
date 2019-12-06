@@ -40,7 +40,7 @@ JSON Web令牌（JWT）的字符串以进行验证
 
 ## Token解析
 
-### 3.1 验证的方法  
+### 3.1 解析的方法  
   ```javascript
   <static> {Array} KJUR.jws.JWS.parse(sJWT)
   ```
@@ -89,6 +89,10 @@ var sPayload = JSON.stringify(oPayload)
 var sJWT = Jsrsasign.KJUR.jws.JWS.sign('HS256', sHeader, sPayload, { b64: 'MTIzNDU2Nzg=' })
   ```
   sJWT即为生成的Token
+* 注  
+  - `exp`（到期时间）-验证时间小于`Payload.exp + gracePeriod`。  
+  - `nbf`（生效时间）-验证时间大于`Payload.nbf-gracePeriod`。  
+  - `iat`（发布时间）-验证时间大于`Payload.iat-gracePeriod`。  
 
  #### 另，更多使用请查询jsrsasign官网API：
   ```javascript
