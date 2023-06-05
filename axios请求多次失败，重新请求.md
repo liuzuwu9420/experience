@@ -35,6 +35,7 @@ if (isVerifyUrl && response.data.status === ResultEnum.REFRESH_STATUS) {
     OMCServerIsStarting = true;
     return startOMCService()
       .then(() => {
+        OMCServerIsStarting = false;
         // 已经刷新了用户空间，将所有队列中的请求进行重试
         requests.forEach((cb) => cb());
         configQueue.forEach((cb) => cb());
